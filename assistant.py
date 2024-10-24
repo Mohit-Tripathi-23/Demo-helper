@@ -1,23 +1,48 @@
 import streamlit as st
 from openai import OpenAI
 
+# Custom CSS to increase the size of text area titles
+st.markdown("""
+    <style>
+    .custom-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: -10px;
+    }
+    .stTextArea textarea {
+        margin-top: -10px; /* Reducing the margin-top of the text area to reduce the gap further */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Set your OpenAI API Key here
 api_key = st.text_input("Enter your OpenAI API key", type="password")
 client = OpenAI(api_key=api_key)
-st.title("Product Demo Assistant")
-# Set your OpenAI API Key here
 
 st.title("🤖 Product Demo Assistant")
 st.markdown("Welcome to the **Product Demo Assistant**! 🎉 Let me help you create a comprehensive and engaging product demo plan for your clients. 🚀")
 
-# User inputs with emojis
+# User inputs with custom titles
 st.header("📝 Product Details")
-product_description = st.text_area("📄 Product Description", "Enter a brief description of the product")
-technologies_used = st.text_area("💻 Technologies Used", "List technologies used in the product")
-department = st.selectbox("🏢 Department", ["Marketing", "Sales", "IT", "HR", "Finance"])
-product_highlights = st.text_area("✨ Product Highlights", "List the key highlights of your product")
-product_limitations = st.text_area("⚠️ Product Limitations", "List known product limitations")
-target_audience = st.multiselect("🎯 Target Audience", ["CTO", "CEO", "Directors", "Clients"], help="Select your target audience")
+
+# Adding custom styled labels for each input
+st.markdown('<div class="custom-title">📄 Product Description</div>', unsafe_allow_html=True)
+product_description = st.text_area("", "Enter a brief description of the product")
+
+st.markdown('<div class="custom-title">💻 Technologies Used</div>', unsafe_allow_html=True)
+technologies_used = st.text_area("", "List technologies used in the product")
+
+st.markdown('<div class="custom-title">🏢 Department</div>', unsafe_allow_html=True)
+department = st.selectbox("", ["Marketing", "Sales", "IT", "HR", "Finance"])
+
+st.markdown('<div class="custom-title">✨ Product Highlights', unsafe_allow_html=True)
+product_highlights = st.text_area("", "List the key highlights of your product")
+
+st.markdown('<div class="custom-title">⚠️ Product Limitations', unsafe_allow_html=True)
+product_limitations = st.text_area("", "List known product limitations")
+
+st.markdown('<div class="custom-title">🎯 Target Audience</div>', unsafe_allow_html=True)
+target_audience = st.multiselect("", ["CTO", "CEO", "Directors", "Clients"], help="Select your target audience")
 
 generate_button = st.button("🛠️ Generate Demo Plan")
 
